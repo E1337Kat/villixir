@@ -38,7 +38,7 @@ The logical flow of this program should be as described:
   %{
     id: id,                           # A WorldEntity's id (could be same id as Person)
     world_location: world_location,   # A WorldEntity's location in the game town based on a cartisean plane.
-    build_cost: build_cost, 
+    build_cost: build_cost,
 
   }
 
@@ -54,10 +54,26 @@ The logical flow of this program should be as described:
     expenses: expenses,               # The amount a building spends on yearly expenses.
     tax_rate: tax_rate,               # The amount the building pays to the town in a year.
     street_address: street_address,   # The street address of a building. Just like an address in real life.
+    square_area: square_area          # Literally the number of squares this building takes up.
    }
 
-   i. A Residential zoned building is a building where a person or group of persons live. The residence has the following additional properties:
-    %{
-      num_families: num_families,     # The number of families in the building.
-      
-    }
+    i. A Residential zoned building is a building where a person or group of persons live. The residence has the following additional properties:
+      %{
+        num_families: num_families,     # The number of families in the building.
+      }
+
+    ii. A BlueCollar building is a building that a person can work at. Blue collar work is labor work. It can be dirty production, clean production, sourcing, or construction. BlueCollar zoned buildings also include Service Industries. Whether it is Service industry or Labor Industry depends on land value and surrounding building density. It has the following additional properties:
+      %{
+      num_workers: num_workers,
+      num_businesses: num_businesses,
+
+      }
+
+    iii. A WhiteCollar zoned building is filled with office spaces, banks, and other low labor industries. 
+      %{
+        num_workers: num_workers,
+        num_offices: num_offices,
+      }
+
+    
+  
