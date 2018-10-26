@@ -8,12 +8,12 @@ defmodule Villixir.GameLoop do
   alias Villixir.Engine
 
   @worker_interval 20
-  
+
   @doc """
   Start the gameloop
   """
-  @spec start_link (State.t()) :: :ok
-  def start_link(State \\ []) do
+  @spec start_link(State.t()) :: :ok
+  def start_link(state \\ []) do
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 

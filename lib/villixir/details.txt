@@ -1,0 +1,34 @@
+The logical flow of this program should be as described:
+
+1. Game loop starts and manages the cycle of the game. 
+
+2. Entity represents a generic protocol that houses basic function definitions for entities in the game world
+
+3. A Person is an entity that has details:
+  %{ 
+    id: id,                                   # The Person's id
+    name: name,                               # The Person's name
+    age: age,                                 # The Person's age
+    current_destination: current_destination  # The Person's current destination (can be nil)
+  }
+
+  a. A person can be either a Resident or Visitor.
+
+    i. A Resident lives and works in the town. A resident has additional properties:
+      %{
+        education: education,   # The Resident's education level
+        home: home,             # The Resident's home address
+        work: work,             # The Resident's work address
+
+      }
+      
+    ii. A Visitor is a Person that lives in some other city that is visiting the Town. A Visitor has some additional properties:
+      %{
+        hometown: hometown,                   # Where this visitor is from.
+        socioeconomic: socioeconomic,         # Level at which the Visitor spends (Upper class, middle class, low class, etc.)
+        mode_of_transport: mode_of_transport, # Could be car, train, sihp, or plane.
+        reason: reason,                       # Business, Pleasure, or Moving
+        details: details,                     # Currently nothing. Could be a string the gives details about this visitor that are not important to simulation
+      }
+
+4. 
