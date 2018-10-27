@@ -1,12 +1,5 @@
 defmodule Villixir.Application do
-  @moduledoc """
-  Set the application.
-  """
-
   use Application
-
-  alias Villixir.{GameLoop}
-  alias Villixir.Store.{Entity, Money}
 
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
@@ -15,13 +8,24 @@ defmodule Villixir.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the Ecto repository
+      supervisor(Villixir.Repo, []),
+      # Start the endpoint when the application starts
+      supervisor(VillixirWeb.Endpoint, []),
       supervisor(Entity, []),
       worker(Money, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_all, name: UaiShot.Supervisor]
+    opts = [strategy: :one_for_all, name: Villixir.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    VillixirWeb.Endpoint.config_change(changed, removed)
+    :ok
   end
 end
