@@ -3,11 +3,17 @@
 ## Description
 
   Most of this is in the [Readme](https://github.com/E1337Kat/villixir/blob/master/specifications.md), but is also summerized here. This is a city simulation game engine. Written with elixir, the goal is to make use of heavy concurrency to run the simulation. A city simulator has three main pieces that are key to having the simulation run. 
+
   The first component are roads. To simplify implementation for now, roads are skipped over and we will assume that everything is directly connected to each other with no distance between them. 
+
   The second component are the buildings in the city. Obviously a city has buildings, but the key is what *types* of buildings exist. There are three types of buildings in this system. There are Residential, Blue Collar, and White collar buildings. 
+
   Residential buildings are homes that city folk live. These include single family home all the way to large apartment complexes and up to huge skyscrapers. The number of Residential buildings in a city determines how many people the city can support. Without housing, no one can live in the city. 
+
   The second type of building is blue collar buildings. Blue collar buildings are places where the primary workforce perform laborious tasks. This includes retail and service industry, dirty industry that is hard labor, farming, and oh so many more. The idea of combining commercial and industrial into a single entity is a major difference with Villixir compared to games such as *SimCity*(TM) or *Cities: Skylines*(TM). The goal of combinging the two is based on wanting to prove that based on the town as built, the city can automatically choose what kind of Blue Collar work should exist. Typically, Blue Collar work is work for low education individuals. Blue Collar work is key to early city growth. 
+  
   Finally, there exists White Collar work. White Collar work is typically office based work. This is low labor work. White Collar work is typically a higher education based workforce. These kinds of buildings can also typically be taxed at a higher rate as they will make more money.
+  
   Buildings are key to the look of a city, but without people, buildings are meaningless. This leads us into the final piece of the simulation puzzle. A Person can be either a resident or a visitor. Person's have names, ages, and more. A person will exist for a bit, and then die when either old, or when they get too sick. Humans are the biggest benefactor of concurrency. Each Person will eist has there own individual entity and process. Persons can have relations to other persons (mothers, fathers, sisters, wifes, daughter, etc.), but these relations mean almost nothing in the context of the simulation. Residents will live and work in the city, while visitors will typically just be tourists that are on free time. Each Person is implemented knowing what they do individually and have no awareness of what other Persons are doing. See below for actor definitions for the Persons and Buildings.
 
 ## Actor Definitions.
