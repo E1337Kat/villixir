@@ -1,0 +1,5 @@
+2d grid map
+Using grid, implement week loop beginnings
+then buildings.
+then people.
+then money.

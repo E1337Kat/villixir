@@ -2,6 +2,8 @@
 
 Villixir is an attempt to build a city simulator using elixir because why not? I only started learning elixir a week before starting on this project. This is taken to be just the backend engine for the game. Using pheonix, we can build out an API that can be used by some kind of GUI implementation that actually makes the game playable by the player. This is very early on in development and should not be considered a game, yet. this is a pre 0.0.1 build right now. Once basic simulation can be ran (people interact from building to building), then 0.0.1 will be reached.
 
+See Specifications.md for more info.
+
 
 To start your Phoenix server:
 
