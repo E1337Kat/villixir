@@ -3,7 +3,7 @@ defmodule Villixir.Engine do
   The engines will contain all of the logic for the various entities
   to interact with each other and with time.
   """
-  alias Villixir.Engine.{PeopleEngine, Week, BuildingEngine}
+  alias Villixir.Engine.Week
 
   @game_width 800
   @game_height 600
