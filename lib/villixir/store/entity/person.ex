@@ -69,11 +69,11 @@ defmodule Villixir.Store.Entity.Person do
   end
 end
 
-defimpl Villixir.Store.Entity, for: Villixir.Store.Entity.Person do
+# defimpl Villixir.Store.Entity, for: Villixir.Store.Entity.Person do
 
-  def is_person? do true end
+#   def is_person? do true end
 
-  def get_location(person_id) do
-    person = get(person_id)
-  end
-end
+#   def get_location(person_id) do
+#     person = get(person_id)
+#   end
+# end

@@ -12,8 +12,8 @@ defmodule Villixir.Application do
       supervisor(Villixir.Repo, []),
       # Start the endpoint when the application starts
       supervisor(VillixirWeb.Endpoint, []),
-      supervisor(Entity, []),
-      worker(Money, [])
+      # supervisor(Entity, []),
+      # worker(Money, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
