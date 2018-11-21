@@ -28,3 +28,4 @@ npm-debug.log
 
 # Ignore VS Code workspace files.
 villixir.code-workspace
+/.elixir_ls

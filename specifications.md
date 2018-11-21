@@ -16,7 +16,62 @@
   
   Buildings are key to the look of a city, but without people, buildings are meaningless. This leads us into the final piece of the simulation puzzle. A Person can be either a resident or a visitor. Person's have names, ages, and more. A person will exist for a bit, and then die when either old, or when they get too sick. Humans are the biggest benefactor of concurrency. Each Person will eist has there own individual entity and process. Persons can have relations to other persons (mothers, fathers, sisters, wifes, daughter, etc.), but these relations mean almost nothing in the context of the simulation. Residents will live and work in the city, while visitors will typically just be tourists that are on free time. Each Person is implemented knowing what they do individually and have no awareness of what other Persons are doing. See below for actor definitions for the Persons and Buildings.
 
-## Actor Definitions.
+## Definitions
+
+### World
+
+The world is a 2d plane that is divided into a number of squares which are x units wide by x units tall. We use this metric instead of saying the world is "x units long by y units tall" so that for future graphical implementation, buildings can take up so many squares and look correct, while in game measurements can be calculated in amount of units. Hopefully the example below can shed some light:
+
+```
++----+----+----+----+----+----+
+|    |  X |  X |  X |    |    |
+|    |    |    |    |    |    |
++----+----+----+----+----+----+
+|    |  X |  X |  X |    |    |
+|    |    |    |    |    |    |
++----+----+----+----+----+----+
+|====|====|====|====|====|====|
+|    |    |    |    | ∥  |    |
++----+----+----+----+----+----+
+|    |    |    |    | ∥  |    |
+|    |    |    |    | ∥  |    |
++----+----+----+----+----+----+
+|    |    |    |    | ∥  |    |
+|    |    |    |    | ∥  |    |
++----+----+----+----+----+----+
+|    |    |    |    | ∥  |    |
+|    |    |    |    | ∥  |    |
++----+----+----+----+----+----+
+
+This map is a 6 square by 6 square map where one square is 5 units by 5 units.
+X = A single building that takes up 3 squares by 2 squares. 
+====| = A road segment that connects from one square to the next.
+∥ = A road segment that goes "up and down" rather from "side to side"
+```
+
+* The world has some rules it follows in creation:
+
+  * The world map starts a square (0,0) in the top left. In relation to a real world map, (0,0) would be the North West corner of the map. 
+  * A square has a local plane that starts in the top left at unit (0,0). In the real world relation, this is the North West corner of the square. 
+  * A sqaure always starts at (0,0) but the world unit location can be found easily by (world_x\*units_per_square, world_y\*units_per_square).
+  * Units per square will be a constant that is as of yet, undetermined, but mostlikely will be either 10 or 16
+  * The number of squares per map is an as of yet undetermined amount, but could be 512, 500, 1024, or 1000. 
+
+* Since There is bound to be a lot of empty space on the game map, the map isn't actually coded like it exists. We abstract the map and store it knowing the width of the map, the height of the map, and what exists on the map and where. When manipulating objects on the map, we simply check whether the object is out of bounds or colliding with another object. In representing the world in this way, we can keep memory usage down at the cost of needing more computational power. The world data structure may look like the following:
+```elixir
+%{
+  world_width: 100,
+  world_height: 100,
+  buildings: [],
+  connections: []
+}
+```
+
+* Future updates may add height maps so that the world can have a 3d representation. Technically though, a 2d plane could be used where each square has a height value that is plus or minus to the "sea level" of the map. This being a rudementary proof of concept project of course, we will not think about such difficulties.
+
+* The above map is rudementary and does not well explain roads in the game world. Roads are placed by having two points on the map and drawing a line between them. The two points will be in the top left corner of a square as seen in the map. In a technical sense, the road point starts at the "address" of the square instead of the square itself (ie. The (0,0) point of the square).
+
+### Actor
 
 * Entity represents a generic protocol that houses basic function definitions for entities in the game world. Entity has no properties like id or anything.
 
@@ -124,13 +179,13 @@ The point of Villir is to provide a framework with which a GUI can interact with
 * A Person makes an amount of money at work time. This is taxed by some tax rate
 * If a person moves to another city, then they are no longer taxed.
 * A Person makes 1/365th of their salary a day.
-* A Person pays 1/365th of their sadlery a day.
-* A person have taxes taken out once a day at after daily Salery-Sadley is found.
+* A Person pays 1/365th of their sadlary a day.
+* A person have taxes taken out once a day at after daily Salery-Sadlary is found.
 
 * The in game day takes two seconds to do a full "24 hours". This means one in game hour is 1/12 of a second.
 * The in game week is 7 in game days, and the in game year is 52 in-game weeks.
-* Taxes are taken once every in-game day
-* Population changes happen once every in-game day.
+* Taxes are taken once every in-game week
+* Population changes happen once every in-game week.
 
 ### Loops
 
