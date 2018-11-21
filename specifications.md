@@ -174,10 +174,10 @@ The point of Villir is to provide a framework with which a GUI can interact with
 
 * A relationship exists between a Person and Buildings. This is a one person relates to many buildings
 
-* An adult Person will work during work times
-* A child Person will go to school during work times
-* A Person makes an amount of money at work time. This is taxed by some tax rate
-* If a person moves to another city, then they are no longer taxed.
+* An adult Person will work during work times.
+* A child Person will go to school during work times.
+* A Person makes an amount of money at work time. This is taxed by some tax rate. The amount can be zero (ie. children)
+* If a person moves to another city, then they are no longer taxed (or even tracked).
 * A Person makes 1/365th of their salary a day.
 * A Person pays 1/365th of their sadlary a day.
 * A person have taxes taken out once a day at after daily Salery-Sadlary is found.
@@ -185,17 +185,17 @@ The point of Villir is to provide a framework with which a GUI can interact with
 * The in game day takes two seconds to do a full "24 hours". This means one in game hour is 1/12 of a second.
 * The in game week is 7 in game days, and the in game year is 52 in-game weeks.
 * Taxes are taken once every in-game week
-* Population changes happen once every in-game week.
+* Population changes happen once every in-game day.
 
 ### Loops
 
 There are several loops that should be considered while the game is being ran.
 
-Main Game Loop: It is the outer most loop and is the loop used to handle graphics updating and the simulation updating
-Main Simulation Loop: This loop handles as it implies, updating the main simulation. It will handle the week loop, the people loops, and building loops. It handles relaying messages between these loops as well. Finally, it handles the simulation speed.
-Main Week Loop: Assuming in game time is moving forward, this loop continues onward. Money is the only component that depends on the in game time element. In game time is not the same as simulation speed even though they are inexplicably linked. Money depends only on the week loop and the amounts are based on the state of the system at the end of each in game week. 
-Main People Loop: Updates people given messages from the week loop and building loop. Handles Lifetime for all people, birthing and culling of people, and each person's daily schedule. The daily schedule is asyncrounous to the week loop, but is dependent on the simulation speed. 
-Main Building Loop: Handles all things buildings. Building level (which also depends on time to a small extent) is determined by the loops tracking of land value. land value is calculated for each building based on surrounding buildings or landscape. The building loop handles buildings needing to be demolished or created (if zoned space is available). 
+* Main Game Loop: It is the outer most loop and is the loop used to handle graphics updating and the simulation updating
+* Main Simulation Loop: This loop handles as it implies, updating the main simulation. It will handle the week loop, the people loops, and building loops. It handles relaying messages between these loops as well. Finally, it handles the simulation speed.
+  * Main Week Loop: Assuming in game time is moving forward, this loop continues onward. Money is the only component that depends on the in game time element. In game time is not the same as simulation speed even though they are inexplicably linked. Money depends only on the week loop and the amounts are based on the state of the system at the end of each in game week. 
+  * Main People Loop: Updates people given messages from the week loop and building loop. Handles Lifetime for all people, birthing and culling of people, and each person's daily schedule. The daily schedule is asyncrounous to the week loop, but is dependent on the simulation speed. 
+  * Main Building Loop: Handles all things buildings. Building level (which also depends on time to a small extent) is determined by the loops tracking of land value. land value is calculated for each building based on surrounding buildings or landscape. The building loop handles buildings needing to be demolished or created (if zoned space is available). 
 
 ### Algorithms
 
